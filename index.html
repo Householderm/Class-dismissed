@@ -538,6 +538,183 @@
       color: var(--ink);
     }
 
+    /* ── SCOPE SECTION ── */
+    .scope-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+
+    .scope-box {
+      border: 2px solid var(--ink);
+      background: var(--chalk);
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .scope-box::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(26,20,16,0.15);
+      pointer-events: none;
+    }
+
+    .scope-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .scope-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    .scope-header-text .scope-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--rust);
+      margin-bottom: 0.2rem;
+    }
+
+    .scope-header-text h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .scope-body {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--ink);
+      opacity: 0.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .scope-body strong {
+      color: var(--ink);
+      font-weight: 600;
+      opacity: 1;
+    }
+
+    .scope-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .scope-col {
+      padding: 1.2rem 1.4rem;
+      background: var(--cream);
+      border-left: 3px solid var(--rust);
+    }
+
+    .scope-col h4 {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--rust);
+      margin-bottom: 0.7rem;
+    }
+
+    .scope-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .scope-col ul li {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--ink);
+      opacity: 0.8;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .scope-col ul li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      font-size: 0.5rem;
+      top: 0.35rem;
+      color: var(--rust);
+    }
+
+    .scope-report-note {
+      margin-top: 1.5rem;
+      padding: 1.2rem 1.4rem;
+      background: var(--cream);
+      border: 1.5px solid var(--ink);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .scope-report-note .report-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .scope-report-note strong {
+      display: block;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+
+    .scope-report-note p {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--ink);
+      opacity: 0.8;
+    }
+
+    .scope-ssa-note {
+      margin-top: 1.5rem;
+      padding: 1rem 1.4rem;
+      background: var(--ink);
+      color: var(--cream);
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+    }
+
+    .scope-ssa-note .ssa-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .scope-ssa-note p {
+      font-size: 0.85rem;
+      line-height: 1.65;
+      opacity: 0.9;
+    }
+
+    .scope-ssa-note strong {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .hero {
@@ -554,6 +731,7 @@
         gap: 2.5rem;
       }
       .features-strip { gap: 1.5rem; }
+      .scope-columns { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -562,7 +740,7 @@
   <!-- MASTHEAD -->
   <header class="masthead">
     <div class="masthead-rule-top"></div>
-    <p class="masthead-dateline">Free · For U.S. Public School Teachers · Est. 2026</p>
+    <p class="masthead-dateline">Free · Built by Educators, for Educators · Est. 2026</p>
     <h1 class="masthead-title">Class <span>Dismissed</span></h1>
     <p class="masthead-subtitle">The Retirement Planner Built for Public School Teachers</p>
     <div class="masthead-rule-bottom"><span>🍎</span></div>
@@ -574,6 +752,7 @@
     <span>✦ No Account Required</span>
     <span>✦ Works Offline</span>
     <span>✦ Your Data Stays on Your Device</span>
+    <span>✦ Generates a Final Report</span>
   </div>
 
   <!-- HERO -->
@@ -582,11 +761,11 @@
       <p class="hero-kicker">Finally, a tool that understands your pension</p>
       <h2 class="hero-headline">You've spent decades planning lessons. Now plan your future.</h2>
       <p class="hero-body">
-        Most retirement calculators weren't built for teachers. They don't know about
-        <strong>defined-benefit pensions</strong>, TRS rules, or the 403(b) quirks that 
-        affect your final number. Class Dismissed does.
+        Most generic retirement calculators found online weren't built for teachers. They don't account for
+        <strong>defined-benefit pensions</strong>, TRS rules, or the supplemental savings accounts — 
+        403(b), 457(b), and IRAs — that make up the rest of your retirement income. Class Dismissed does.
       </p>
-      <span class="hero-badge">✓ Built specifically for U.S. public school teachers</span>
+      <span class="hero-badge">✓ Built by Educators, for Educators — Free for U.S. Public School Teachers</span>
     </div>
 
     <div class="hero-col-divider"></div>
@@ -671,7 +850,10 @@
         <p class="why-copy">
           Teacher retirement is different. You likely have a defined-benefit pension, 
           not a 401(k). Your income in retirement depends on your years of service, 
-          final salary, and your state's TRS formula — not just a savings balance. 
+          final salary, and your state's TRS formula — not just a savings balance. And 
+          the generic retirement calculators found online weren't designed to factor in 
+          the supplemental accounts many teachers also carry: <strong>403(b), 457(b), and IRA</strong> 
+          balances that can meaningfully boost your retirement income. 
           Class Dismissed handles the math that other tools miss.
         </p>
       </div>
@@ -699,6 +881,13 @@
           </div>
         </li>
         <li>
+          <span class="fact-icon">📋</span>
+          <div class="fact-text">
+            <strong>Comprehensive Final Report</strong>
+            <span>Generates a printable summary that brings every income source together — pension, savings, and Social Security — so you can see your full retirement picture at a glance.</span>
+          </div>
+        </li>
+        <li>
           <span class="fact-icon">🆓</span>
           <div class="fact-text">
             <strong>Free, Forever</strong>
@@ -709,12 +898,79 @@
     </div>
   </section>
 
+  <!-- SCOPE & PURPOSE SECTION -->
+  <section class="scope-section">
+    <div class="scope-box">
+      <div class="scope-header">
+        <span class="scope-icon">🔭</span>
+        <div class="scope-header-text">
+          <p class="scope-eyebrow">Understanding This Tool</p>
+          <h3>A Complement to Your State TRS Calculator — Not a Replacement</h3>
+        </div>
+      </div>
+
+      <p class="scope-body">
+        Your state's Teacher Retirement System (TRS) provides an official pension calculator that reflects 
+        the exact rules, multipliers, and benefit structures of your specific plan. <strong>That calculator 
+        should always be your primary source for pension projections.</strong>
+      </p>
+      <p class="scope-body">
+        Class Dismissed serves a different — and equally important — purpose: it helps you see the 
+        <strong>complete picture of your retirement income</strong> by bringing together your pension 
+        estimate alongside every other asset working in your favor. Most teachers are surprised to 
+        discover how much stronger their retirement looks when all the pieces are viewed together.
+      </p>
+
+      <div class="scope-columns">
+        <div class="scope-col">
+          <h4>Your State TRS Calculator</h4>
+          <ul>
+            <li>Authoritative pension benefit calculation</li>
+            <li>State-specific rules &amp; multipliers</li>
+            <li>Exact vesting schedules</li>
+            <li>Official survivor &amp; disability benefits</li>
+          </ul>
+        </div>
+        <div class="scope-col">
+          <h4>What Class Dismissed Adds</h4>
+          <ul>
+            <li>403(b) &amp; 457(b) supplemental savings</li>
+            <li>IRA balances (Traditional &amp; Roth)</li>
+            <li>Social Security benefits (own &amp; spousal)</li>
+            <li>Holistic income &amp; spending gap analysis</li>
+            <li>Printable final report — your complete picture</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="scope-report-note">
+        <span class="report-icon">📋</span>
+        <div>
+          <strong>Your Retirement, All on One Page</strong>
+          <p>When you're done entering your information, Class Dismissed generates a comprehensive final report — a clear, printable summary that consolidates your pension estimate, supplemental savings projections, and Social Security income into a single document. It's the bigger picture your state TRS calculator wasn't designed to show you.</p>
+        </div>
+      </div>
+
+      <div class="scope-ssa-note">
+        <span class="ssa-icon">📜</span>
+        <p>
+          <strong>Social Security Fairness Act (January 2025):</strong> The elimination of the 
+          Windfall Elimination Provision (WEP) and Government Pension Offset (GPO) means many 
+          public school teachers are now eligible to receive Social Security benefits — including 
+          spousal and survivor benefits — that were previously reduced or eliminated. Class Dismissed 
+          accounts for this landmark change, helping you understand what Social Security may now 
+          mean for your retirement income.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- DISCLAIMER -->
   <div class="disclaimer">
     <div class="disclaimer-inner">
       <span class="disclaimer-icon">⚖️</span>
       <p>
-        <strong>Not Financial Advice.</strong> Class Dismissed is an independent educational tool created by a fellow educator, not a licensed financial adviser, broker, or tax professional. The estimates and projections it produces are for <em>informational and planning purposes only</em> and do not constitute personalized financial, legal, or tax advice. Results are based on inputs you provide and general assumptions — actual retirement benefits will vary based on your specific pension plan rules, years of service, and other individual factors. Always consult a qualified financial professional or your state's Teacher Retirement System (TRS) office before making retirement decisions.
+        <strong>Not Financial Advice.</strong> Class Dismissed is an independent educational tool created by a fellow educator, not a licensed financial adviser, broker, or tax professional. The estimates and projections it produces are for <em>informational and planning purposes only</em> and do not constitute personalized financial, legal, or tax advice. This tool is designed to complement — not replace — the official pension calculator provided by your state's Teacher Retirement System. Pension projections should always be verified directly with your TRS office, as benefit rules, multipliers, and eligibility requirements vary by state and individual circumstance. Social Security estimates are based on user-provided inputs and reflect the provisions of the Social Security Fairness Act (enacted January 2025), including the repeal of the Windfall Elimination Provision (WEP) and the Government Pension Offset (GPO); actual Social Security benefits are determined by the Social Security Administration. Always consult a qualified financial professional before making retirement decisions.
       </p>
     </div>
   </div>
@@ -723,7 +979,7 @@
   <footer>
     <span class="footer-ornament">✦ ✦ ✦</span>
     <p>
-      Made with ❤️ for the teachers who give everything — <strong>now it's your turn to plan for you.</strong>
+      Made with ❤️ by educators, for educators — <strong>because you've given enough. Now it's your turn.</strong>
     </p>
     <p style="margin-top:0.5rem;">
       Open source · 
