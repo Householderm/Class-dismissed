@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Dismissed 🎓 — Free Teacher Retirement Planner</title>
+<meta name="description" content="Free retirement planner for public school teachers. Download for Windows, Mac, or use instantly in your browser.">
+<style>
+:root{--ink:#1a1a2e;--teal:#2a9d8f;--teal2:#3bb5a6;--gold:#c9a84c;--gold2:#e8c97a;--green:#2d9a6f;--fd:'Georgia','Times New Roman',serif;--fb:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;--fm:'Consolas','Menlo',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fb);background:var(--ink);color:white}
+
+.hero{background:linear-gradient(160deg,#0d0d1f 0%,#0f2027 55%,#1a2e1a 100%);padding:88px 24px 72px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(42,157,143,.13) 0%,transparent 70%);pointer-events:none}
+.hero-emoji{font-size:4.5rem;display:block;margin-bottom:22px;filter:drop-shadow(0 4px 24px rgba(201,168,76,.45))}
+.hero h1{font-family:var(--fd);font-size:clamp(2.4rem,5.5vw,4rem);font-weight:700;color:var(--gold2);letter-spacing:-1.5px;line-height:1.1;margin-bottom:18px}
+.hero h1 span{color:white}
+.hero-tag{font-size:clamp(1rem,2.5vw,1.2rem);color:rgba(255,255,255,.72);max-width:600px;margin:0 auto 44px;line-height:1.65}
+.hero-tag strong{color:#6ee7b7}
+
+.dl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px;margin:0 auto 32px}
+@media(max-width:700px){.dl-grid{grid-template-columns:1fr}}
+.dlc{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:26px 20px 22px;text-align:center;transition:all .22s;position:relative;overflow:hidden}
+.dlc:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.22);transform:translateY(-3px)}
+.dlc.feat{border-color:rgba(201,168,76,.5);background:rgba(201,168,76,.06)}
+.dlc-badge{position:absolute;top:12px;right:12px;background:var(--gold);color:var(--ink);font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:20px}
+.dlc-icon{font-size:2.4rem;margin-bottom:10px;display:block}
+.dlc h3{font-size:1.05rem;font-weight:700;color:white;margin-bottom:5px}
+.dlc-sub{font-size:.78rem;color:rgba(255,255,255,.45);margin-bottom:18px;line-height:1.5}
+.dlc-fmt{font-family:var(--fm);font-size:.68rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;color:rgba(255,255,255,.35)}
+.dlc.feat .dlc-fmt{color:var(--gold2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:50px;font-size:.88rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;border:none;font-family:var(--fb);margin-bottom:4px}
+.b-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--ink);box-shadow:0 4px 18px rgba(201,168,76,.35)}
+.b-gold:hover{box-shadow:0 6px 26px rgba(201,168,76,.55)}
+.b-win{background:linear-gradient(135deg,#0078d4,#106ebe);color:white;box-shadow:0 4px 18px rgba(0,120,212,.3)}
+.b-win:hover{box-shadow:0 6px 26px rgba(0,120,212,.5)}
+.b-mac{background:linear-gradient(135deg,#555,#333);color:white;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.b-mac:hover{box-shadow:0 6px 22px rgba(0,0,0,.55)}
+.b-src{background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);font-size:.8rem}
+.b-src:hover{background:rgba(255,255,255,.12);color:white}
+.dl-note{font-size:.72rem;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.4}
+
+.badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.hb{padding:4px 12px;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.5px}
+.hb-g{background:rgba(45,154,111,.2);color:#6ee7b7;border:1px solid rgba(110,231,183,.2)}
+.hb-t{background:rgba(42,157,143,.15);color:#5dd8cb;border:1px solid rgba(42,157,143,.25)}
+.hb-o{background:rgba(201,168,76,.15);color:var(--gold2);border:1px solid rgba(232,201,122,.2)}
+
+.sec{padding:64px 24px;max-width:1060px;margin:0 auto}
+.sl{font-family:var(--fm);font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--teal2);text-align:center;margin-bottom:8px;font-weight:600}
+.st{font-family:var(--fd);font-size:clamp(1.5rem,3vw,2.1rem);text-align:center;color:white;margin-bottom:8px}
+.ss{text-align:center;color:rgba(255,255,255,.45);font-size:.88rem;max-width:520px;margin:0 auto 36px;line-height:1.6}
+
+.priv{display:flex;gap:14px;align-items:center;background:rgba(45,154,111,.08);border:1px solid rgba(110,231,183,.15);border-radius:14px;padding:18px 22px;margin-bottom:36px;flex-wrap:wrap}
+.priv-icon{font-size:1.8rem;flex-shrink:0}
+.priv h4{font-size:.9rem;color:#6ee7b7;font-weight:700;margin-bottom:3px}
+.priv p{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.55}
+
+.ssfa{background:linear-gradient(135deg,#1a2e1a,#0f2027);border:1px solid rgba(110,231,183,.25);border-radius:18px;padding:28px 32px;margin-bottom:40px}
+.ssfa-lbl{font-family:var(--fm);font-size:.68rem;text-transform:uppercase;letter-spacing:1.5px;color:#6ee7b7;font-weight:700;margin-bottom:8px}
+.ssfa h3{font-size:1.15rem;color:white;font-weight:700;margin-bottom:10px}
+.ssfa p{font-size:.87rem;color:rgba(255,255,255,.65);line-height:1.65}
+.ssfa-g{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+@media(max-width:500px){.ssfa-g{grid-template-columns:1fr}}
+.ssfa-i{background:rgba(255,255,255,.05);border-radius:10px;padding:12px 14px}
+.ssfa-i h5{font-size:.8rem;color:#6ee7b7;font-weight:700;margin-bottom:4px}
+.ssfa-i p{font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.5}
+
+.feat-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.fc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:22px;transition:all .2s}
+.fc:hover{background:rgba(255,255,255,.07);border-color:rgba(42,157,143,.3)}
+.fc-i{font-size:1.7rem;margin-bottom:10px}
+.fc h3{font-size:.95rem;color:white;font-weight:700;margin-bottom:5px}
+.fc p{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.6}
+
+.inst-wrap{background:rgba(255,255,255,.025);border-top:1px solid rgba(255,255,255,.07);padding:64px 24px}
+.inst-in{max-width:860px;margin:0 auto}
+.tab-row{display:flex;gap:8px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}
+.tb{padding:8px 20px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(255,255,255,.55);cursor:pointer;font-size:.85rem;font-weight:600;transition:all .2s;font-family:var(--fb)}
+.tb:hover{border-color:rgba(255,255,255,.25);color:white}
+.tb.act{background:var(--teal);border-color:var(--teal);color:white}
+.tp{display:none}
+.tp.act{display:block}
+.step-g{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:600px){.step-g{grid-template-columns:1fr}}
+.sc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:22px}
+.sc h4{font-size:.95rem;color:white;margin-bottom:14px;font-weight:700}
+.sr{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+.sn{width:24px;height:24px;border-radius:50%;background:var(--teal);color:white;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.st2{font-size:.83rem;color:rgba(255,255,255,.65);line-height:1.55}
+.st2 strong{color:white}
+.st2 code{font-family:var(--fm);background:rgba(255,255,255,.1);padding:1px 5px;border-radius:4px;font-size:.8rem;color:#6ee7b7}
+.warn{background:rgba(244,162,97,.07);border:1px solid rgba(244,162,97,.2);border-radius:10px;padding:12px 16px;margin-top:16px;font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.55}
+.warn strong{color:#f4a261}
+
+.share-wrap{background:rgba(255,255,255,.025);border-top:1px solid rgba(255,255,255,.07);padding:64px 24px}
+.share-in{max-width:720px;margin:0 auto;text-align:center}
+.host-g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0;text-align:left}
+@media(max-width:600px){.host-g{grid-template-columns:1fr}}
+.hc{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:18px}
+.hc-t{font-family:var(--fm);font-size:.63rem;text-transform:uppercase;letter-spacing:1px;color:var(--teal2);font-weight:600;margin-bottom:6px}
+.hc h4{font-size:.88rem;font-weight:700;color:white;margin-bottom:5px}
+.hc p{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.55}
+.url-row{display:flex;gap:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;margin:20px 0;align-items:center;flex-wrap:wrap}
+.url-inp{flex:1;font-family:var(--fm);font-size:.8rem;color:rgba(255,255,255,.55);background:none;border:none;outline:none;min-width:180px;cursor:text;user-select:all}
+.copy-btn{background:var(--teal);color:white;border:none;border-radius:8px;padding:7px 16px;font-size:.8rem;font-weight:700;cursor:pointer;transition:background .2s;white-space:nowrap;font-family:var(--fb)}
+.copy-btn:hover{background:var(--teal2)}
+
+footer{text-align:center;padding:36px 24px;font-size:.76rem;color:rgba(255,255,255,.22);border-top:1px solid rgba(255,255,255,.06)}
+footer a{color:rgba(255,255,255,.35);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-emoji">🎓</span>
+  <h1>Class Dismissed<span>.</span></h1>
+  <p class="hero-tag">The <strong>free retirement planner</strong> built exclusively for public school teachers — pension, Social Security, spousal benefits, taxes, and your full timeline in one place.</p>
+
+  <div class="dl-grid">
+    <div class="dlc feat">
+      <div class="dlc-badge">Easiest</div>
+      <span class="dlc-icon">🌐</span>
+      <h3>Use in Browser</h3>
+      <p class="dlc-sub">Windows &amp; Mac &middot; No install &middot; Works offline after download</p>
+      <div class="dlc-fmt">.html file &middot; ~100 KB</div>
+      <a href="ClassDismissed-RetirementPlanner.html" download="ClassDismissed-RetirementPlanner.html" class="btn b-gold">⬇ Download Free</a>
+      <p class="dl-note">Double-click to open in Chrome, Edge, Safari, or Firefox</p>
+    </div>
+    <div class="dlc">
+      <span class="dlc-icon">🪟</span>
+      <h3>Windows App</h3>
+      <p class="dlc-sub">Windows 10/11 &middot; 64-bit &middot; Desktop shortcut + Start Menu</p>
+      <div class="dlc-fmt">.exe installer &middot; ~70 MB</div>
+      <a href="ClassDismissed-Setup-1.0.0.exe" download class="btn b-win">⬇ Download for Windows</a>
+      <a href="ClassDismissed-ElectronSource.zip" download class="btn b-src">📦 Build from Source</a>
+      <p class="dl-note">Build with Electron — see instructions below</p>
+    </div>
+    <div class="dlc">
+      <span class="dlc-icon">🍎</span>
+      <h3>Mac App</h3>
+      <p class="dlc-sub">macOS 11+ &middot; Intel &amp; Apple Silicon &middot; Standard .dmg</p>
+      <div class="dlc-fmt">.dmg installer &middot; ~80 MB</div>
+      <a href="ClassDismissed-1.0.0.dmg" download class="btn b-mac">⬇ Download for Mac</a>
+      <a href="ClassDismissed-ElectronSource.zip" download class="btn b-src">📦 Build from Source</a>
+      <p class="dl-note">Build with Electron — see instructions below</p>
+    </div>
+  </div>
+
+  <div class="badges">
+    <span class="hb hb-g">✓ 100% Free</span>
+    <span class="hb hb-o">✓ SSFA 2025 Built In</span>
+    <span class="hb hb-g">✓ Works Offline</span>
+    <span class="hb hb-g">✓ No Data Collected</span>
+    <span class="hb hb-t">✓ Windows &amp; Mac</span>
+    <span class="hb hb-o">✓ No Login Required</span>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="ssfa">
+    <div class="ssfa-lbl">🏛️ Historic Change — January 5, 2025</div>
+    <h3>Social Security Fairness Act — Fully Built In</h3>
+    <p>WEP and GPO have been <strong style="color:#6ee7b7">permanently repealed</strong>. Class Dismissed is fully updated — calculate your restored benefits, estimate retroactive back-pay, and maximize spousal and survivor SS strategies under the new law.</p>
+    <div class="ssfa-g">
+      <div class="ssfa-i"><h5>WEP Repealed</h5><p>Your own SS benefit is no longer reduced because you receive a government pension. Full earned benefit restored.</p></div>
+      <div class="ssfa-i"><h5>GPO Repealed</h5><p>Spousal and survivor SS benefits no longer offset by 2/3 of your pension. Previously zero benefit may now be substantial.</p></div>
+    </div>
+  </div>
+
+  <div class="sl">What's Inside</div>
+  <div class="st">Everything a teacher needs to retire with confidence</div>
+  <p class="ss">An 8-step guided interview — like TurboTax, but for your retirement. Answer simple questions, get a full personalized plan.</p>
+
+  <div class="priv">
+    <div class="priv-icon">🔒</div>
+    <div><h4>Your data never leaves your computer</h4><p>Class Dismissed runs entirely in your browser or local desktop app — no servers, no accounts, no tracking. Everything you enter stays on your device. Close the app and it's gone.</p></div>
+  </div>
+
+  <div class="feat-g">
+    <div class="fc"><div class="fc-i">📋</div><h3>Guided Interview</h3><p>8 simple steps walk through your full financial picture — like TurboTax, designed for how teachers think.</p></div>
+    <div class="fc"><div class="fc-i">🏫</div><h3>Pension Calculator</h3><p>Enter years of service and multiplier, or paste your known pension, to see projected annual income.</p></div>
+    <div class="fc"><div class="fc-i">🛡️</div><h3>SS Strategy (SSFA 2025)</h3><p>Compare claiming at 62, 67, and 70 for you and your spouse. Full WEP/GPO repeal impact included.</p></div>
+    <div class="fc"><div class="fc-i">💰</div><h3>Gap Analysis</h3><p>See if projected income covers expenses — with a clear surplus or shortfall and steps to close the gap.</p></div>
+    <div class="fc"><div class="fc-i">💡</div><h3>Tax Minimization</h3><p>403(b), 457(b), Roth conversion, and HSA strategies to keep more of your retirement income.</p></div>
+    <div class="fc"><div class="fc-i">🗓️</div><h3>Expense Timeline</h3><p>Projects when your mortgage pays off, debts disappear, and Medicare kicks in — exactly when costs drop.</p></div>
+    <div class="fc"><div class="fc-i">📈</div><h3>Portfolio Projections</h3><p>Models 403(b), 457(b), IRA, Roth IRA, and HSA growth to retirement with your return assumptions.</p></div>
+    <div class="fc"><div class="fc-i">⚖️</div><h3>Retire Early vs. Late</h3><p>Side-by-side: retire 2 years early, on schedule, or 3 years late — see the full financial impact.</p></div>
+    <div class="fc"><div class="fc-i">🖨️</div><h3>Printable Report</h3><p>One-click print or PDF. Share with a financial advisor, union rep, or HR retirement counselor.</p></div>
+  </div>
+</div>
+
+<div class="inst-wrap">
+  <div class="inst-in">
+    <div class="sl">How to Use It</div>
+    <div class="st" style="font-family:var(--fd);margin-bottom:8px">Choose how you want to run it</div>
+    <p class="ss">Three ways to use Class Dismissed — pick what's right for you.</p>
+
+    <div class="tab-row">
+      <button class="tb act" onclick="showTab(this,'t-html')">🌐 Browser (HTML)</button>
+      <button class="tb" onclick="showTab(this,'t-win')">🪟 Windows App</button>
+      <button class="tb" onclick="showTab(this,'t-mac')">🍎 Mac App</button>
+      <button class="tb" onclick="showTab(this,'t-build')">📦 Build from Source</button>
+    </div>
+
+    <div class="tp act" id="t-html">
+      <div class="step-g">
+        <div class="sc"><h4>🪟 Windows</h4>
+          <div class="sr"><div class="sn">1</div><div class="st2">Click <strong>Download Free</strong> above. The file <code>ClassDismissed-RetirementPlanner.html</code> saves to Downloads.</div></div>
+          <div class="sr"><div class="sn">2</div><div class="st2"><strong>Double-click the file.</strong> Windows opens it in your default browser — Chrome, Edge, or Firefox all work.</div></div>
+          <div class="sr"><div class="sn">3</div><div class="st2">Optional: <strong>Right-click → Send to → Desktop</strong> to create a shortcut for easy daily access.</div></div>
+          <div class="sr"><div class="sn">4</div><div class="st2">No internet needed after download. <strong>Fully offline.</strong></div></div>
+        </div>
+        <div class="sc"><h4>🍎 Mac</h4>
+          <div class="sr"><div class="sn">1</div><div class="st2">Click <strong>Download Free</strong> above. File saves to your Downloads folder.</div></div>
+          <div class="sr"><div class="sn">2</div><div class="st2"><strong>Double-click</strong> to open in Safari, or right-click → <strong>Open With</strong> to choose Chrome or Firefox.</div></div>
+          <div class="sr"><div class="sn">3</div><div class="st2">Optional: Drag the file to your <strong>Dock</strong> or Desktop for quick access.</div></div>
+          <div class="sr"><div class="sn">4</div><div class="st2">No Gatekeeper warning (it's a web page). Fully private and offline.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tp" id="t-win">
+      <div class="step-g">
+        <div class="sc"><h4>Install on Windows</h4>
+          <div class="sr"><div class="sn">1</div><div class="st2">Download <code>ClassDismissed-Setup-1.0.0.exe</code> using the Windows button above.</div></div>
+          <div class="sr"><div class="sn">2</div><div class="st2">Double-click the installer. If SmartScreen appears, click <strong>"More info" → "Run anyway"</strong>.</div></div>
+          <div class="sr"><div class="sn">3</div><div class="st2">Choose install location, click <strong>Install</strong>. Desktop shortcut and Start Menu entry created automatically.</div></div>
+          <div class="sr"><div class="sn">4</div><div class="st2">Launch from Desktop or Start Menu. Works fully offline.</div></div>
+          <div class="warn"><strong>SmartScreen Note:</strong> Because the app isn't commercially code-signed, Windows may show a warning on first run. Click "More info" → "Run anyway" to proceed safely.</div>
+        </div>
+        <div class="sc"><h4>System Requirements</h4>
+          <div class="sr"><div class="sn">✓</div><div class="st2"><strong>OS:</strong> Windows 10 or 11 (64-bit)</div></div>
+          <div class="sr"><div class="sn">✓</div><div class="st2"><strong>RAM:</strong> 4 GB minimum</div></div>
+          <div class="sr"><div class="sn">✓</div><div class="st2"><strong>Disk:</strong> ~200 MB free space</div></div>
+          <div class="sr"><div class="sn">✓</div><div class="st2"><strong>Internet:</strong> Not required — fully offline</div></div>
+          <div style="margin-top:16px;text-align:center">
+            <a href="ClassDismissed-ElectronSource.zip" download class="btn b-gold" style="max-width:280px;margin:0 auto;display:inline-flex">📦 Get Source to Build .exe</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tp" id="t-mac">
+      <div class="step-g">
+        <div class="sc"><h4>Install on Mac</h4>
+          <div class="sr"><div class="sn">1</div><div class="st2">Download <code>ClassDismissed-1.0.0.dmg</code> using the Mac button above.</div></div>
+          <div class="sr"><div class="sn">2</div><div class="st2">Double-click the .dmg. Drag <strong>Class Dismissed</strong> into your <strong>Applications</strong> folder.</div></div>
+          <div class="sr"><div class="sn">3</div><div class="st2">First launch: right-click the app → <strong>Open</strong> → click <strong>Open</strong> in the Gatekeeper dialog (one-time).</div></div>
+          <div class="sr"><div class="sn">4</div><div class="st2">App is now in Applications. Works fully offline.</div></div>
+          <div class="warn"><strong>Gatekeeper Note:</strong> The app isn't notarized through Apple Developer Program. Right-click → Open the first time to bypass the warning. After that, it opens normally from your Dock.</div>
+        </div>
+        <div class="sc"><h4>System Requirements</h4>
+          <div class="sr"><div class="sn">✓</div><div class="st2"><strong>OS:</strong> macOS 11 Big Sur or newer</div></div>
+          <div class="sr"><div class="sn">✓</div><div class="st2"><strong>Chip:</strong> Intel x64 and Apple Silicon (M1/M2/M3) both supported</div></div>
+          <div class="sr"><div class="sn">✓</div><div class="st2"><strong>RAM:</strong> 4 GB minimum</div></div>
+          <div class="sr"><div class="sn">✓</div><div class="st2"><strong>Internet:</strong> Not required — fully offline</div></div>
+          <div style="margin-top:16px;text-align:center">
+            <a href="ClassDismissed-ElectronSource.zip" download class="btn b-gold" style="max-width:280px;margin:0 auto;display:inline-flex">📦 Get Source to Build .dmg</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tp" id="t-build">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:28px">
+        <h4 style="font-size:1rem;color:white;margin-bottom:6px">Build the Windows .exe and Mac .dmg yourself</h4>
+        <p style="font-size:.83rem;color:rgba(255,255,255,.5);margin-bottom:20px;line-height:1.6">Class Dismissed is built with <strong style="color:white">Electron</strong> — the same technology behind VS Code and Slack. Compile your own installer in about 5 minutes.</p>
+        <div class="step-g">
+          <div class="sc"><h4>Prerequisites</h4>
+            <div class="sr"><div class="sn">1</div><div class="st2">Install <strong>Node.js 18+</strong> from <a href="https://nodejs.org" target="_blank" style="color:var(--teal2)">nodejs.org</a> (free, includes npm)</div></div>
+            <div class="sr"><div class="sn">2</div><div class="st2">Download and unzip <code>ClassDismissed-ElectronSource.zip</code></div></div>
+            <div class="sr"><div class="sn">3</div><div class="st2">Open a terminal: <strong>Command Prompt</strong> (Windows) or <strong>Terminal</strong> (Mac)</div></div>
+          </div>
+          <div class="sc"><h4>Build Commands</h4>
+            <div class="sr"><div class="sn">1</div><div class="st2"><code>cd class-dismissed</code> then <code>npm install</code><br><span style="font-size:.75rem;opacity:.6">Downloads Electron ~80MB (one time)</span></div></div>
+            <div class="sr"><div class="sn">2</div><div class="st2"><strong>Windows:</strong> <code>npm run build:win</code><br>→ <code>dist/Class Dismissed Setup 1.0.0.exe</code></div></div>
+            <div class="sr"><div class="sn">3</div><div class="st2"><strong>Mac:</strong> <code>npm run build:mac</code><br>→ <code>dist/Class Dismissed-1.0.0.dmg</code></div></div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:24px">
+          <a href="ClassDismissed-ElectronSource.zip" download class="btn b-gold" style="max-width:340px;margin:0 auto;display:inline-flex">
+            📦 Download Electron Source Code (.zip)
+          </a>
+          <p style="font-size:.73rem;color:rgba(255,255,255,.3);margin-top:10px">Includes main.js · package.json · app.html · icons · BUILD_GUIDE.txt</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="padding:56px 24px;background:linear-gradient(160deg,#0d0d1f 0%,#1a2e1a 100%);border-top:1px solid rgba(255,255,255,.07)">
+  <div style="max-width:720px;margin:0 auto;text-align:center">
+    <div style="font-family:var(--font-m);font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold2);font-weight:600;margin-bottom:8px">☕ Support the Work</div>
+    <div style="font-family:var(--font-d);font-size:clamp(1.6rem,3.5vw,2.2rem);color:white;font-weight:700;margin-bottom:14px;letter-spacing:-0.5px">Class Dismissed is free.<br>Your support keeps it that way.</div>
+    <p style="font-size:.92rem;color:rgba(255,255,255,.62);line-height:1.7;max-width:580px;margin:0 auto 32px">
+      Maintaining this tool takes real time — tracking Social Security law changes, pension updates across 50 states,
+      tax rule revisions, and improving the planner year after year. If Class Dismissed helped you feel more prepared
+      for retirement, a small donation means a lot and keeps everything up to date.
+    </p>
+    <a href="https://buymeacoffee.com/householderm" target="_blank" rel="noopener"
+      style="display:inline-flex;align-items:center;gap:10px;padding:16px 40px;border-radius:50px;background:#FFDD00;color:#1a1a1a;font-weight:800;font-size:1.05rem;text-decoration:none;box-shadow:0 6px 28px rgba(255,221,0,.4);transition:all .2s;font-family:var(--font-b);letter-spacing:-.3px"
+      onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 36px rgba(255,221,0,.55)'"
+      onmouseout="this.style.transform='';this.style.boxShadow='0 6px 28px rgba(255,221,0,.4)'">
+      ☕ Buy Me a Coffee
+    </a>
+    <p style="font-size:.78rem;color:rgba(255,255,255,.28);font-style:italic;margin-top:18px">
+      This tool will always be 100% free. Donations are entirely voluntary and never required to access any feature.
+    </p>
+  </div>
+</div>
+
+<div class="share-wrap">
+  <div class="share-in">
+    <div class="sl">Distribute It</div>
+    <div class="st" style="font-family:var(--fd);font-size:clamp(1.5rem,3vw,2rem);margin-bottom:8px">Host it. Share it. Spread the word.</div>
+    <p style="color:rgba(255,255,255,.45);font-size:.88rem;line-height:1.6;margin-bottom:4px">Upload to any web host and share the link — takes about 5 minutes to go live.</p>
+
+    <div class="host-g">
+      <div class="hc"><div class="hc-t">Free · Easiest</div><h4>GitHub Pages</h4><p>Create a free GitHub repo, upload the HTML file, enable Pages. Get a permanent URL instantly.</p></div>
+      <div class="hc"><div class="hc-t">Free · No-code</div><h4>Netlify / Vercel</h4><p>Drag and drop files onto netlify.com. Get a free URL like <em>class-dismissed.netlify.app</em> in 60 seconds.</p></div>
+      <div class="hc"><div class="hc-t">Already have it</div><h4>School / Union Site</h4><p>Upload to your teacher association, union, or district website. Add the HTML to any web folder.</p></div>
+    </div>
+
+    <p style="font-size:.82rem;color:rgba(255,255,255,.35);margin-bottom:10px">Your shareable link — edit and share:</p>
+    <div class="url-row">
+      <input type="text" class="url-inp" id="share-url" value="https://your-site.com/class-dismissed" readonly onclick="this.select()">
+      <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+    </div>
+
+    <p style="font-size:.82rem;color:rgba(255,255,255,.35);margin-bottom:14px;margin-top:8px">Files to upload:</p>
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:18px 20px;text-align:left;font-family:var(--fm);font-size:.8rem;color:rgba(255,255,255,.55);line-height:2.1">
+      📄 <strong style="color:white">class-dismissed-download-page.html</strong> &nbsp;← rename to index.html<br>
+      📄 <strong style="color:white">ClassDismissed-RetirementPlanner.html</strong> &nbsp;← the app itself<br>
+      📦 <strong style="color:white">ClassDismissed-ElectronSource.zip</strong> &nbsp;← Electron source code<br>
+      <span style="color:rgba(255,255,255,.3);font-size:.72rem">+ Add .exe and .dmg after building from source</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Class Dismissed is a free educational tool for public school teachers. Not a substitute for professional financial advice.</p>
+  <p style="margin-top:6px">Always consult a licensed financial advisor or retirement counselor for personalized guidance.</p>
+  <p style="margin-top:12px">© 2025 Class Dismissed — For Public School Educators &nbsp;·&nbsp; <a href="ClassDismissed-RetirementPlanner.html" target="_blank">Open App</a> &nbsp;·&nbsp; <a href="ClassDismissed-ElectronSource.zip" download>Source Code</a> &nbsp;·&nbsp; <a href="https://buymeacoffee.com/householderm" target="_blank" rel="noopener" style="color:#FFDD00">☕ Buy Me a Coffee</a></p>
+</footer>
+
+<script>
+function showTab(btn,id){document.querySelectorAll('.tb').forEach(b=>b.classList.remove('act'));document.querySelectorAll('.tp').forEach(p=>p.classList.remove('act'));btn.classList.add('act');document.getElementById(id).classList.add('act')}
+function copyLink(){const u=document.getElementById('share-url').value;navigator.clipboard.writeText(u).then(()=>{const b=document.querySelector('.copy-btn');b.innerText='✓ Copied!';b.style.background='#2d9a6f';setTimeout(()=>{b.innerText='Copy Link';b.style.background=''},2200)})}
+const ua=navigator.userAgent.toLowerCase();
+if(ua.includes('win'))document.querySelectorAll('.dlc')[1].style.borderColor='rgba(0,120,212,.5)';
+else if(ua.includes('mac'))document.querySelectorAll('.dlc')[2].style.borderColor='rgba(150,150,150,.5)';
+</script>
+</body>
+</html>
