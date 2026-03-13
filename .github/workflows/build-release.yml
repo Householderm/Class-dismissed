@@ -8,9 +8,6 @@ on:
 jobs:
   build-windows:
     runs-on: windows-latest
-    defaults:
-      run:
-        working-directory: ClassDismissed-ElectronSource/class-dismissed
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,10 +18,10 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: cd ClassDismissed-ElectronSource/class-dismissed && npm install
 
       - name: Build Windows installer
-        run: npm run build:win
+        run: cd ClassDismissed-ElectronSource/class-dismissed && npm run build:win
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -36,9 +33,6 @@ jobs:
 
   build-mac:
     runs-on: macos-latest
-    defaults:
-      run:
-        working-directory: ClassDismissed-ElectronSource/class-dismissed
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -49,10 +43,10 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: cd ClassDismissed-ElectronSource/class-dismissed && npm install
 
       - name: Build Mac DMG
-        run: npm run build:mac
+        run: cd ClassDismissed-ElectronSource/class-dismissed && npm run build:mac
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
