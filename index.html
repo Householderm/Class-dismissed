@@ -3,371 +3,735 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Class Dismissed – Teacher Retirement Planner</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <title>Class Dismissed 🎓 – Retirement Planner for Teachers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --red: #e63946;
-      --yellow: #ffd166;
-      --green: #06d6a0;
-      --blue: #118ab2;
-      --dark-blue: #073b4c;
-      --orange: #f4a261;
-      --white: #fffef7;
-      --board-green: #2d6a4f;
+      --cream: #f5f0e8;
+      --ink: #1a1410;
+      --rust: #c4522a;
+      --gold: #d4a843;
+      --sage: #4a6741;
+      --chalk: #fdfaf4;
+      --rule: #1a1410;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Nunito', sans-serif;
-      background-color: #f7f3e9;
-      min-height: 100vh;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
       overflow-x: hidden;
     }
 
-    /* Bulletin board cork background */
-    .cork-banner {
-      background-color: #c68642;
-      background-image:
-        radial-gradient(ellipse at 20% 30%, rgba(180,110,40,0.4) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(140,80,20,0.3) 0%, transparent 50%),
-        url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='0.5' fill='rgba(100,60,10,0.15)'/%3E%3C/svg%3E");
-      padding: 40px 20px 60px;
-      position: relative;
-      border-bottom: 8px solid #8B5E2A;
-    }
-
-    /* Decorative border top of cork */
-    .cork-banner::before {
+    /* ── NEWSPAPER TEXTURE ── */
+    body::before {
       content: '';
-      display: block;
-      height: 12px;
-      background: repeating-linear-gradient(
-        90deg,
-        var(--red) 0px, var(--red) 20px,
-        var(--yellow) 20px, var(--yellow) 40px,
-        var(--blue) 40px, var(--blue) 60px,
-        var(--green) 60px, var(--green) 80px
-      );
-      position: absolute;
-      top: 0; left: 0; right: 0;
+      position: fixed;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(26,20,16,0.04) 28px, rgba(26,20,16,0.04) 29px);
+      pointer-events: none;
+      z-index: 0;
     }
 
-    /* Pinned note style for title */
-    .pinned-title {
-      background: var(--white);
-      max-width: 700px;
-      margin: 0 auto;
-      border-radius: 4px;
-      padding: 30px 40px;
+    /* ── MASTHEAD ── */
+    .masthead {
+      border-bottom: 4px double var(--rule);
+      padding: 1rem 2rem 0.6rem;
+      text-align: center;
       position: relative;
-      box-shadow: 3px 4px 0px rgba(0,0,0,0.2), 6px 8px 20px rgba(0,0,0,0.15);
-      transform: rotate(-1deg);
-      animation: fadeDown 0.6s ease both;
+      background: var(--chalk);
     }
 
-    @keyframes fadeDown {
-      from { opacity: 0; transform: rotate(-1deg) translateY(-20px); }
-      to { opacity: 1; transform: rotate(-1deg) translateY(0); }
+    .masthead-rule-top {
+      height: 2px;
+      background: var(--ink);
+      margin-bottom: 0.5rem;
     }
 
-    /* Pushpin */
-    .pinned-title::before {
-      content: '📌';
-      font-size: 28px;
-      position: absolute;
-      top: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
+    .masthead-dateline {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.55;
+      margin-bottom: 0.4rem;
+      font-weight: 400;
     }
 
-    .pinned-title h1 {
-      font-family: 'Fredoka One', cursive;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      color: var(--dark-blue);
-      line-height: 1.1;
-      text-align: center;
+    .masthead-title {
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-transform: uppercase;
     }
 
-    .pinned-title h1 span {
-      color: var(--red);
+    .masthead-title span {
+      color: var(--rust);
     }
 
-    .pinned-title p {
-      text-align: center;
-      color: #555;
+    .masthead-subtitle {
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-top: 0.6rem;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    .masthead-rule-bottom {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.6rem;
+    }
+    .masthead-rule-bottom::before,
+    .masthead-rule-bottom::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--ink);
+    }
+    .masthead-rule-bottom span {
+      font-size: 1.1rem;
+    }
+
+    /* ── HERO SECTION ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 2px 1.6fr;
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem 2rem;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-col-divider {
+      background: var(--ink);
+      margin: 0 2rem;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .hero-kicker {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rust);
+      font-weight: 600;
+      border-left: 3px solid var(--rust);
+      padding-left: 0.6rem;
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    .hero-body {
       font-size: 1.05rem;
-      margin-top: 10px;
+      line-height: 1.75;
+      color: var(--ink);
+      opacity: 0.8;
+    }
+
+    .hero-body strong {
+      color: var(--rust);
       font-weight: 600;
     }
 
-    /* Chalkboard section */
-    .chalkboard {
-      background-color: var(--board-green);
-      background-image:
-        radial-gradient(ellipse at 10% 20%, rgba(255,255,255,0.03) 0%, transparent 60%),
-        radial-gradient(ellipse at 90% 80%, rgba(0,0,0,0.1) 0%, transparent 60%);
-      padding: 50px 20px 60px;
-      position: relative;
-      border-top: 14px solid #5c3a1e;
-      border-bottom: 14px solid #5c3a1e;
+    .hero-badge {
+      display: inline-block;
+      background: var(--sage);
+      color: white;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.35rem 0.8rem;
+      border-radius: 2px;
+      width: fit-content;
     }
 
-    .chalkboard::before {
-      content: 'Choose Your Download';
-      font-family: 'Fredoka One', cursive;
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      color: rgba(255,255,255,0.85);
-      display: block;
-      text-align: center;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-      /* chalk dust effect */
-      filter: blur(0.3px);
-    }
-
-    .chalk-subtitle {
-      text-align: center;
-      color: rgba(255,255,255,0.55);
-      font-size: 0.95rem;
-      margin-bottom: 40px;
-      font-style: italic;
-      letter-spacing: 0.5px;
-    }
-
-    .download-cards {
+    .hero-right {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       justify-content: center;
-      gap: 24px;
-      max-width: 900px;
+    }
+
+    /* ── PULL QUOTE ── */
+    .pullquote {
+      border-top: 3px solid var(--ink);
+      border-bottom: 3px solid var(--ink);
+      padding: 1.5rem 0;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .pullquote p {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.3rem, 3vw, 1.9rem);
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    .pullquote cite {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 0.7rem;
+      color: var(--rust);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* ── FEATURES STRIP ── */
+    .features-strip {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 0.7rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      z-index: 1;
+      position: relative;
+    }
+
+    .features-strip span {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* ── DOWNLOAD SECTION ── */
+    .download-section {
+      max-width: 1100px;
       margin: 0 auto;
+      padding: 3rem 2rem;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+    .section-rule::before, .section-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--ink);
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* ── CARDS ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--ink);
+      border: 1.5px solid var(--ink);
     }
 
     .card {
-      background: var(--white);
-      border-radius: 8px;
-      padding: 32px 28px;
-      width: 240px;
-      text-align: center;
+      background: var(--chalk);
+      padding: 2rem 1.8rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: background 0.2s ease;
       position: relative;
-      box-shadow: 4px 4px 0px rgba(0,0,0,0.25);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      animation: popIn 0.5s ease both;
-      border-top: 6px solid var(--card-color, var(--blue));
+      overflow: hidden;
     }
 
-    .card:nth-child(1) { --card-color: var(--blue); animation-delay: 0.1s; }
-    .card:nth-child(2) { --card-color: var(--orange); animation-delay: 0.2s; }
-    .card:nth-child(3) { --card-color: var(--green); animation-delay: 0.3s; }
-
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.85) translateY(20px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--rust);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
     }
 
-    .card:hover {
-      transform: translateY(-6px) rotate(0.5deg);
-      box-shadow: 6px 10px 0px rgba(0,0,0,0.2);
-    }
+    .card:hover { background: #fffef9; }
+    .card:hover::before { transform: scaleX(1); }
 
     .card-icon {
-      font-size: 3rem;
-      margin-bottom: 12px;
-      display: block;
+      font-size: 2rem;
+      line-height: 1;
     }
 
-    .card h2 {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.3rem;
-      color: var(--dark-blue);
-      margin-bottom: 6px;
-    }
-
-    .card p {
-      font-size: 0.85rem;
-      color: #777;
-      margin-bottom: 20px;
+    .card-platform {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       font-weight: 600;
+      color: var(--rust);
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--ink);
+      opacity: 0.7;
+      flex: 1;
+    }
+
+    .card-note {
+      font-size: 0.75rem;
+      color: var(--ink);
+      opacity: 0.5;
+      font-style: italic;
     }
 
     .btn {
-      display: inline-block;
-      padding: 10px 22px;
-      border-radius: 50px;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.4rem;
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       text-decoration: none;
-      transition: transform 0.15s ease, filter 0.15s ease;
-      color: white;
-      background-color: var(--card-color, var(--blue));
-      box-shadow: 0 3px 0px rgba(0,0,0,0.2);
-      letter-spacing: 0.3px;
+      border: 2px solid var(--ink);
+      color: var(--ink);
+      background: transparent;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      width: fit-content;
     }
 
     .btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.1);
+      background: var(--ink);
+      color: var(--cream);
     }
 
-    .btn:active {
-      transform: translateY(1px);
-      box-shadow: none;
+    .btn-primary {
+      background: var(--rust);
+      border-color: var(--rust);
+      color: white;
     }
 
-    /* Apple chip note */
-    .chip-note {
+    .btn-primary:hover {
+      background: #a8421f;
+      border-color: #a8421f;
+      color: white;
+    }
+
+    .btn-small {
       font-size: 0.75rem;
-      color: #aaa;
-      margin-top: 8px;
+      padding: 0.55rem 1rem;
+      margin-top: 0.3rem;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    /* ── WHY SECTION ── */
+    .why-section {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 3.5rem 2rem;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.7s forwards;
+    }
+
+    .why-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .why-left .section-rule::before,
+    .why-left .section-rule::after { background: var(--cream); opacity: 0.3; }
+    .why-left .section-label { color: var(--gold); }
+    .why-left .section-title { color: var(--cream); }
+
+    .why-copy {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--cream);
+      opacity: 0.8;
+      margin-top: 1rem;
+    }
+
+    .facts-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .facts-list li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .fact-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .fact-text strong {
       display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+      font-family: 'Source Serif 4', serif;
     }
 
-    /* Decorative bottom section */
-    .footer-desk {
-      background: #f0e8d0;
-      border-top: 4px solid #d4b896;
-      padding: 30px 20px;
-      text-align: center;
-    }
-
-    .apple-row {
-      font-size: 1.8rem;
-      letter-spacing: 6px;
-      margin-bottom: 10px;
-    }
-
-    .footer-desk p {
-      color: #888;
+    .fact-text span {
       font-size: 0.88rem;
+      line-height: 1.6;
+      opacity: 0.75;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 4px double var(--ink);
+      padding: 2rem;
+      text-align: center;
+      background: var(--chalk);
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: var(--ink);
+      opacity: 0.6;
+      line-height: 1.7;
+    }
+
+    footer strong {
+      color: var(--rust);
       font-weight: 600;
     }
 
-    /* Decorative stickers on cork */
-    .stickers {
-      position: absolute;
-      width: 100%;
-      top: 20px;
-      left: 0;
-      pointer-events: none;
+    .footer-ornament {
+      font-size: 1.3rem;
+      margin: 0.6rem 0;
+      display: block;
+      opacity: 0.4;
     }
 
-    .sticker {
-      position: absolute;
-      font-size: 1.6rem;
-      animation: wiggle 3s ease-in-out infinite;
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .sticker:nth-child(1) { left: 5%; top: 10px; animation-delay: 0s; }
-    .sticker:nth-child(2) { left: 12%; top: 40px; animation-delay: 0.5s; }
-    .sticker:nth-child(3) { right: 5%; top: 10px; animation-delay: 1s; }
-    .sticker:nth-child(4) { right: 12%; top: 40px; animation-delay: 1.5s; }
-
-    @keyframes wiggle {
-      0%, 100% { transform: rotate(-5deg); }
-      50% { transform: rotate(5deg); }
-    }
-
-    /* Chalk tray */
-    .chalk-tray {
-      height: 16px;
-      background: #4a4a4a;
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      background: var(--chalk);
+      border-top: 1px solid rgba(26,20,16,0.15);
+      border-bottom: 1px solid rgba(26,20,16,0.15);
+      padding: 1.1rem 2rem;
       position: relative;
-      max-width: 900px;
-      margin: 0 auto -16px;
-      border-radius: 2px;
+      z-index: 1;
     }
 
-    .chalk-tray::after {
-      content: '';
-      position: absolute;
-      left: 30px;
-      top: 4px;
-      width: 60px;
-      height: 8px;
-      background: #f0f0f0;
-      border-radius: 2px;
-      box-shadow: 80px 0 0 #f0f0f0, 160px 0 0 #f5e6c8;
+    .disclaimer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
     }
 
-    @media (max-width: 600px) {
-      .pinned-title { padding: 24px 20px; }
-      .card { width: 90%; max-width: 300px; }
-      .sticker { display: none; }
+    .disclaimer-icon {
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+      opacity: 0.55;
+    }
+
+    .disclaimer p {
+      font-size: 0.75rem;
+      line-height: 1.65;
+      color: var(--ink);
+      opacity: 0.6;
+      font-style: italic;
+    }
+
+    .disclaimer strong {
+      font-style: normal;
+      font-weight: 600;
+      opacity: 1;
+      color: var(--ink);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 2rem 1.2rem;
+      }
+      .hero-col-divider { display: none; }
+      .pullquote { margin-top: 2rem; }
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      .why-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .features-strip { gap: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Cork bulletin board header -->
-  <div class="cork-banner">
-    <div class="stickers">
-      <span class="sticker">⭐</span>
-      <span class="sticker">🍎</span>
-      <span class="sticker">⭐</span>
-      <span class="sticker">🍎</span>
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="masthead-rule-top"></div>
+    <p class="masthead-dateline">Free · For U.S. Public School Teachers · Est. 2026</p>
+    <h1 class="masthead-title">Class <span>Dismissed</span></h1>
+    <p class="masthead-subtitle">The Retirement Planner Built for Public School Teachers</p>
+    <div class="masthead-rule-bottom"><span>🍎</span></div>
+  </header>
+
+  <!-- FEATURES STRIP -->
+  <div class="features-strip">
+    <span>✦ 100% Free</span>
+    <span>✦ No Account Required</span>
+    <span>✦ Works Offline</span>
+    <span>✦ Your Data Stays on Your Device</span>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-kicker">Finally, a tool that understands your pension</p>
+      <h2 class="hero-headline">You've spent decades planning lessons. Now plan your future.</h2>
+      <p class="hero-body">
+        Most retirement calculators weren't built for teachers. They don't know about
+        <strong>defined-benefit pensions</strong>, TRS rules, or the 403(b) quirks that 
+        affect your final number. Class Dismissed does.
+      </p>
+      <span class="hero-badge">✓ Built specifically for U.S. public school teachers</span>
     </div>
-    <div class="pinned-title">
-      <h1>Class <span>Dismissed</span> 🎓</h1>
-      <p>The Retirement Planner Built for Public School Teachers</p>
+
+    <div class="hero-col-divider"></div>
+
+    <div class="hero-right">
+      <div class="pullquote">
+        <p>"You give everything to your classroom. Now it's your turn to plan for you."</p>
+        <cite>— The Class Dismissed Mission</cite>
+      </div>
+      <a href="https://householderm.github.io/class-dismissed-main/ClassDismissed-RetirementPlanner.html"
+         class="btn btn-primary" style="align-self:center; font-size:1rem; padding:1rem 2rem; letter-spacing:0.1em;">
+        ▶ &nbsp;Open in Browser — Free, No Install
+      </a>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD SECTION -->
+  <section class="download-section">
+    <div class="section-header">
+      <div class="section-rule"><span class="section-label">Choose Your Platform</span></div>
+      <h2 class="section-title">Download or Use Instantly in Your Browser</h2>
+    </div>
+
+    <div class="cards">
+
+      <!-- BROWSER -->
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <p class="card-platform">Any Device · Instant Access</p>
+        <h3 class="card-title">Browser</h3>
+        <p class="card-desc">
+          No download, no account, no hassle. Open it right now on any 
+          laptop, tablet, or Chromebook. Works in Chrome, Safari, Firefox, and Edge.
+        </p>
+        <div class="btn-group">
+          <a href="https://householderm.github.io/class-dismissed-main/ClassDismissed-RetirementPlanner.html"
+             class="btn btn-primary">▶ Open Now</a>
+        </div>
+      </div>
+
+      <!-- WINDOWS -->
+      <div class="card">
+        <div class="card-icon">🪟</div>
+        <p class="card-platform">Windows 10 &amp; 11</p>
+        <h3 class="card-title">Windows App</h3>
+        <p class="card-desc">
+          Install the full desktop app for Windows. Runs completely offline 
+          — your pension numbers never leave your computer.
+        </p>
+        <div class="btn-group">
+          <a href="https://github.com/Householderm/Class-dismissed/releases/download/v1.0.0/Class.Dismissed.Setup.1.0.0.exe"
+             class="btn">⬇ Download for Windows</a>
+        </div>
+      </div>
+
+      <!-- MAC -->
+      <div class="card">
+        <div class="card-icon">🍎</div>
+        <p class="card-platform">macOS</p>
+        <h3 class="card-title">Mac App</h3>
+        <p class="card-desc">
+          Native macOS app available for both Intel and Apple Silicon Macs.
+          Not sure which chip you have? Go to <em>Apple → About This Mac</em> and check "Chip."
+        </p>
+        <div class="btn-group">
+          <a href="https://github.com/Householderm/Class-dismissed/releases/download/v1.0.0/Class.Dismissed-1.0.0.dmg"
+             class="btn">⬇ Download (Intel Mac)</a>
+          <a href="https://github.com/Householderm/Class-dismissed/releases/download/v1.0.0/Class.Dismissed-1.0.0-arm64.dmg"
+             class="btn btn-small">⬇ Download (Apple Silicon)</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHY SECTION -->
+  <section class="why-section">
+    <div class="why-inner">
+      <div class="why-left">
+        <div class="section-rule"><span class="section-label" style="color:var(--gold);">Why Class Dismissed</span></div>
+        <h2 class="section-title">Generic calculators weren't built for you.</h2>
+        <p class="why-copy">
+          Teacher retirement is different. You likely have a defined-benefit pension, 
+          not a 401(k). Your income in retirement depends on your years of service, 
+          final salary, and your state's TRS formula — not just a savings balance. 
+          Class Dismissed handles the math that other tools miss.
+        </p>
+      </div>
+
+      <ul class="facts-list">
+        <li>
+          <span class="fact-icon">🏫</span>
+          <div class="fact-text">
+            <strong>Pension-First Design</strong>
+            <span>Models your defined-benefit pension as the foundation of your retirement income, not an afterthought.</span>
+          </div>
+        </li>
+        <li>
+          <span class="fact-icon">📅</span>
+          <div class="fact-text">
+            <strong>Years of Service Calculator</strong>
+            <span>Tracks how additional years in the classroom change your retirement payout — because staying one more year can matter a lot.</span>
+          </div>
+        </li>
+        <li>
+          <span class="fact-icon">🔒</span>
+          <div class="fact-text">
+            <strong>Completely Private</strong>
+            <span>Your salary, pension, and retirement data never leave your device. No cloud, no account, no data collection.</span>
+          </div>
+        </li>
+        <li>
+          <span class="fact-icon">🆓</span>
+          <div class="fact-text">
+            <strong>Free, Forever</strong>
+            <span>Built with appreciation for public school teachers. No subscription, no premium tier, no catch.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <div class="disclaimer-inner">
+      <span class="disclaimer-icon">⚖️</span>
+      <p>
+        <strong>Not Financial Advice.</strong> Class Dismissed is an independent educational tool created by a fellow educator, not a licensed financial adviser, broker, or tax professional. The estimates and projections it produces are for <em>informational and planning purposes only</em> and do not constitute personalized financial, legal, or tax advice. Results are based on inputs you provide and general assumptions — actual retirement benefits will vary based on your specific pension plan rules, years of service, and other individual factors. Always consult a qualified financial professional or your state's Teacher Retirement System (TRS) office before making retirement decisions.
+      </p>
     </div>
   </div>
 
-  <!-- Chalkboard download section -->
-  <div class="chalkboard">
-    <p class="chalk-subtitle">Pick the version that works best for you</p>
-
-    <div class="download-cards">
-
-      <!-- Windows -->
-      <div class="card">
-        <span class="card-icon">🪟</span>
-        <h2>Windows</h2>
-        <p>Desktop app for Windows 10 &amp; 11</p>
-        <a class="btn" href="https://github.com/Householderm/Class-dismissed/releases/download/v1.0.0/Class.Dismissed.Setup.1.0.0.exe">
-          ⬇ Download
-        </a>
-      </div>
-
-      <!-- Mac -->
-      <div class="card">
-        <span class="card-icon">🍎</span>
-        <h2>Mac</h2>
-        <p>Desktop app for macOS</p>
-        <a class="btn" href="https://github.com/Householderm/Class-dismissed/releases/download/v1.0.0/Class.Dismissed-1.0.0.dmg">
-          ⬇ Download (Intel)
-        </a>
-        <br/>
-        <a class="btn" style="margin-top:10px; display:inline-block;" href="https://github.com/Householderm/Class-dismissed/releases/download/v1.0.0/Class.Dismissed-1.0.0-arm64.dmg">
-          ⬇ Download (Apple Silicon)
-        </a>
-        <span class="chip-note">Not sure? Check 🍎 → About This Mac → Chip</span>
-      </div>
-
-      <!-- Browser -->
-      <div class="card">
-        <span class="card-icon">🌐</span>
-        <h2>Use in Browser</h2>
-        <p>No install needed — runs right in your browser</p>
-        <a class="btn" href="class-dismissed-main/ClassDismissed-RetirementPlanner.html">
-          ▶ Open Now
-        </a>
-      </div>
-
-    </div>
-
-    <div class="chalk-tray"></div>
-  </div>
-
-  <!-- Footer -->
-  <div class="footer-desk">
-    <div class="apple-row">🍎🍎🍎</div>
-    <p>Made with ❤️ for the teachers who give everything — now it's your turn to plan for you.</p>
-  </div>
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-ornament">✦ ✦ ✦</span>
+    <p>
+      Made with ❤️ for the teachers who give everything — <strong>now it's your turn to plan for you.</strong>
+    </p>
+    <p style="margin-top:0.5rem;">
+      Open source · 
+      <a href="https://github.com/Householderm/Class-dismissed" 
+         style="color:var(--rust); text-decoration:none; font-weight:600;">View on GitHub</a>
+       · v1.0.0
+    </p>
+  </footer>
 
 </body>
 </html>
