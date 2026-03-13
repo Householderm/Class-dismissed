@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Free retirement planner for public school teachers",
   "main": "main.js",
+  "repository": "https://github.com/Householderm/class-dismissed",
   "author": "Class Dismissed — Teacher Retirement Planner",
   "license": "MIT",
   "scripts": {
