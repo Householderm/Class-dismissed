@@ -2807,6 +2807,33 @@ function generateResults() {
 
   taxHTML += `<div class="tax-tip"><div class="tt-title">📑 Required Minimum Distributions (RMDs)</div><div class="tt-body">At age 73, the IRS requires withdrawals from traditional 403(b), IRA, and 457(b) accounts. Strategy: begin moderate withdrawals at retirement to avoid large RMDs pushing you into higher tax brackets. Your Roth IRA has NO RMDs during your lifetime.</div></div>`;
 
+  // Suggest 403(b) and IRA if both are missing
+  const no403b = current403b === 0;
+  const noIRA   = currentIRA === 0;
+  if (no403b && noIRA) {
+    taxHTML += `<div class="tax-tip" style="border-left-color:var(--teal)">
+      <div class="tt-title">📬 Consider Opening a 403(b) or IRA — Especially if You Receive a Severance</div>
+      <div class="tt-body">
+        You currently have no 403(b) or IRA on record. This is worth addressing — especially if you will be entitled to a <strong>severance payment or lump-sum payout</strong> upon retirement. In many cases, those funds must be rolled into a tax-advantaged account to avoid a large tax bill and early withdrawal penalties.
+        <br><br>
+        <strong>A 403(b)</strong> is offered through your school district and funded by payroll deduction — ask your HR or benefits office how to enroll. A <strong>Traditional or Roth IRA</strong> can be opened independently at any time, directly through a brokerage.
+        <br><br>
+        <strong style="color:var(--ink)">Suggested brokers for opening an IRA — all free to open, no minimums:</strong><br>
+        <span style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin-top:8px;">
+          <span>🏦 <strong>Fidelity</strong> — fidelity.com · No fees, excellent tools</span>
+          <span>🏦 <strong>Vanguard</strong> — vanguard.com · Index fund pioneer, low costs</span>
+          <span>🏦 <strong>Charles Schwab</strong> — schwab.com · Great for beginners</span>
+          <span>🏦 <strong>T. Rowe Price</strong> — troweprice.com · Strong retirement focus</span>
+        </span>
+      </div>
+      <div class="tt-save">
+        ⚠️ <strong>Important:</strong> Many school districts limit which financial brokers are approved for 403(b) contributions and severance rollovers. The brokers listed above may or may not be available through your district. <strong>Always contact your school district's HR or benefits office first</strong> to confirm which brokers are authorized before opening or transferring funds into any account.
+        <br><br>
+        This is a general suggestion only — not personalized financial advice. Consult a licensed financial advisor to determine the best account type for your situation.
+      </div>
+    </div>`;
+  }
+
   document.getElementById('tax-tips-box').innerHTML = taxHTML;
 
   const savingsRows = [
