@@ -965,13 +965,13 @@
 
         <div class="q-row">
           <div class="q-item full">
-            <label>Does your state teacher pension exempt you from Social Security? <span class="hint">(historically)</span></label>
+            <label id="label-ssexempt">Does your state teacher pension exempt you from Social Security? <span class="hint">(historically)</span></label>
             <div class="radio-group" id="rg-ssexempt">
-              <div class="radio-btn selected" onclick="selectRadio(this,'rg-ssexempt')">Yes — I do NOT pay into SS</div>
-              <div class="radio-btn" onclick="selectRadio(this,'rg-ssexempt')">No — I DO pay into SS</div>
-              <div class="radio-btn" onclick="selectRadio(this,'rg-ssexempt')">Not Sure</div>
+              <div class="radio-btn selected" id="ssexempt-yes" onclick="selectRadio(this,'rg-ssexempt')">Yes — I do NOT pay into SS</div>
+              <div class="radio-btn" id="ssexempt-no" onclick="selectRadio(this,'rg-ssexempt')">No — I DO pay into SS</div>
+              <div class="radio-btn" id="ssexempt-notsure" onclick="selectRadio(this,'rg-ssexempt')">Not Sure</div>
             </div>
-            <div style="margin-top:10px;background:linear-gradient(135deg,rgba(45,154,111,0.1),rgba(42,157,143,0.08));border:1px solid rgba(45,154,111,0.3);border-radius:10px;padding:10px 14px;font-size:0.8rem;color:var(--slate);line-height:1.6">
+            <div id="ssexempt-callout" style="margin-top:10px;background:linear-gradient(135deg,rgba(45,154,111,0.1),rgba(42,157,143,0.08));border:1px solid rgba(45,154,111,0.3);border-radius:10px;padding:10px 14px;font-size:0.8rem;color:var(--slate);line-height:1.6">
               🏛️ <strong style="color:var(--green)">Social Security Fairness Act (Jan 2025):</strong> WEP and GPO have been <strong>repealed</strong>. Teachers who were previously denied or reduced SS benefits may now be eligible for full or restored benefits — including spousal benefits. We'll walk you through this in Step 5.
             </div>
           </div>
@@ -1732,11 +1732,15 @@
 
         <div class="q-row">
           <div class="q-item full">
-            <label>Do you have any Social Security work credits? <span class="hint">(40 credits = ~10 years in SS-covered employment)</span></label>
+            <label id="label-ss-credits">Have you ever worked a job that paid into Social Security? <span class="hint">(outside of teaching, or in a state that does participate in SS)</span></label>
+            <div style="margin-bottom:10px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:11px 14px;font-size:0.8rem;color:var(--slate);line-height:1.65">
+              <strong style="color:var(--ink)">💡 What are SS credits?</strong> Each year you work a job that withholds Social Security taxes (FICA), you earn up to <strong>4 credits</strong>. You need <strong>40 credits total — roughly 10 years</strong> of SS-covered work — to qualify for your own Social Security retirement benefit. Common sources include summer jobs, part-time work outside teaching, a working spouse's record, or teaching in a state that <em>does</em> participate in Social Security.
+              <br><span style="color:var(--muted);font-size:0.76rem;margin-top:4px;display:block">Not sure? Log in at <a href="https://www.ssa.gov/myaccount/" target="_blank" style="color:var(--teal)">ssa.gov/myaccount</a> to see your full earnings history and credit count.</span>
+            </div>
             <div class="radio-group" id="rg-ss-prior">
-              <div class="radio-btn" onclick="selectRadio(this,'rg-ss-prior');toggleSSSection(true)">Yes — I have SS credits from prior or current employment</div>
+              <div class="radio-btn" id="rg-ss-prior-yes" onclick="selectRadio(this,'rg-ss-prior');toggleSSSection(true)">Yes — I have SS credits from other employment</div>
               <div class="radio-btn selected" onclick="selectRadio(this,'rg-ss-prior');toggleSSSection(false)">No — I have never paid into SS</div>
-              <div class="radio-btn" onclick="selectRadio(this,'rg-ss-prior');toggleSSSection(true)">Not sure — need to check ssa.gov</div>
+              <div class="radio-btn" onclick="selectRadio(this,'rg-ss-prior');toggleSSSection(true)">Not sure — I need to check ssa.gov</div>
             </div>
           </div>
         </div>
@@ -1806,7 +1810,7 @@
         </div>
         <div class="q-row">
           <div class="q-item full">
-            <label>When do you plan to have your spouse claim Social Security?</label>
+            <label id="label-spouse-claim">When do you plan to have your spouse claim Social Security?</label>
             <div class="radio-group" id="rg-spouse-claim">
               <div class="radio-btn" onclick="selectRadio(this,'rg-spouse-claim')">Age 62 (reduced — ~75%)</div>
               <div class="radio-btn selected" onclick="selectRadio(this,'rg-spouse-claim')">Age 67 (Full Retirement Age)</div>
@@ -1816,7 +1820,7 @@
         </div>
         <div class="q-row">
           <div class="q-item full">
-            <label>Your teacher claiming strategy (if eligible for SS)</label>
+            <label id="label-teacher-claim">Your teacher claiming strategy (if eligible for SS)</label>
             <div class="radio-group" id="rg-teacher-claim">
               <div class="radio-btn" onclick="selectRadio(this,'rg-teacher-claim')">Age 62 (reduced benefit)</div>
               <div class="radio-btn selected" onclick="selectRadio(this,'rg-teacher-claim')">Age 67 (Full Retirement Age)</div>
@@ -1829,27 +1833,111 @@
 
       </div><!-- end spouse-ss-wrapper -->
       <div class="q-group">
-        <div class="q-group-title">Healthcare Bridge</div>
+        <div class="q-group-title">Healthcare Bridge to Medicare</div>
+
+        <div class="info-callout" style="margin-bottom:18px">
+          <strong>How retiree health coverage typically works:</strong> Most state teacher pension systems (like STRS Ohio) offer retiree health insurance, but the premiums are split into two very different tiers — one rate for the <strong>member alone</strong>, and a significantly higher rate when a <strong>spouse is added</strong>. Both rates drop considerably once you enroll in Medicare at age 65, which STRS Ohio and many other systems <strong>require</strong> at age 65 (Parts A &amp; B). Planning for these two phases — pre-65 and post-65 — is key to avoiding surprise costs.
+        </div>
+
         <div class="q-row">
           <div class="q-item full">
-            <label>Do you have retiree health insurance through your retirement system?</label>
+            <label>Do you have retiree health insurance through your pension / retirement system?</label>
             <div class="radio-group" id="rg-retiree-health">
-              <div class="radio-btn selected" onclick="selectRadio(this,'rg-retiree-health')">Yes — retirement system coverage</div>
-              <div class="radio-btn" onclick="selectRadio(this,'rg-retiree-health')">Partial — subsidized through retirement system</div>
-              <div class="radio-btn" onclick="selectRadio(this,'rg-retiree-health')">No — need to self-insure until Medicare</div>
+              <div class="radio-btn selected" onclick="selectRadio(this,'rg-retiree-health');showHealthFields(true)">Yes — through my retirement system</div>
+              <div class="radio-btn" onclick="selectRadio(this,'rg-retiree-health');showHealthFields(true)">Partial — subsidized but I pay a portion</div>
+              <div class="radio-btn" onclick="selectRadio(this,'rg-retiree-health');showHealthFields(false)">No — I need to self-insure until Medicare</div>
             </div>
           </div>
         </div>
-        <div class="q-row">
-          <div class="q-item"><label>Estimated monthly healthcare cost in retirement</label>
-            <div class="input-prefix-wrap"><span class="input-prefix">$</span>
-            <input type="number" id="q-health-retire" placeholder="0"></div></div>
-          <div class="q-item" style="display:flex;align-items:flex-end;padding-bottom:2px;">
-            <div style="background:rgba(42,157,143,0.07);border-radius:10px;padding:10px 14px;width:100%;font-size:0.82rem;color:var(--slate);line-height:1.5">
-              Your HSA balance &amp; contributions were entered in Step 4 — they will be projected forward to help cover these retirement healthcare costs.
+
+        <div id="health-pension-fields">
+          <div style="margin:16px 0 10px;font-size:0.78rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);padding-bottom:6px">
+            📋 Phase 1 — Before Age 65 (Pre-Medicare)
+          </div>
+          <div style="font-size:0.8rem;color:var(--slate);margin-bottom:12px;line-height:1.6">
+            Enter your estimated monthly premiums <strong>before</strong> you (and your spouse) reach Medicare age. Your retirement system likely charges a much higher rate to add a spouse — enter each separately below.
+          </div>
+          <div class="q-row">
+            <div class="q-item">
+              <label>Your monthly premium <span class="hint">(member only, pre-65)</span></label>
+              <div class="input-prefix-wrap"><span class="input-prefix">$</span>
+              <input type="number" id="q-health-member-pre65" placeholder="0" oninput="calcHealthTotal()"></div>
+            </div>
+            <div class="q-item" id="health-spouse-pre65-field">
+              <label>Spouse add-on premium <span class="hint">(additional cost to cover spouse, pre-65)</span></label>
+              <div class="input-prefix-wrap"><span class="input-prefix">$</span>
+              <input type="number" id="q-health-spouse-pre65" placeholder="0" oninput="calcHealthTotal()"></div>
+            </div>
+            <div class="q-item" style="display:flex;align-items:flex-end;padding-bottom:2px">
+              <div style="background:rgba(42,157,143,0.07);border-radius:10px;padding:10px 14px;width:100%">
+                <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:4px;font-family:var(--font-mono)">TOTAL PRE-65 / MO</div>
+                <div style="font-size:1.2rem;font-weight:700;color:var(--ink);font-family:var(--font-mono)" id="health-total-pre65">$0</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin:16px 0 10px;font-size:0.78rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);padding-bottom:6px">
+            🏥 Phase 2 — After Age 65 (Post-Medicare Enrollment)
+          </div>
+          <div style="font-size:0.8rem;color:var(--slate);margin-bottom:12px;line-height:1.6">
+            Once you enroll in Medicare Parts A &amp; B at 65, your retirement system premium typically drops significantly — Medicare becomes your primary insurer and the pension plan acts as a supplement. Enter your expected post-65 rates below. <strong>Note:</strong> your spouse's rate may remain higher until <em>they</em> also reach 65 and enroll in Medicare.
+          </div>
+          <div class="q-row">
+            <div class="q-item">
+              <label>Your monthly premium <span class="hint">(member only, post-65 / on Medicare)</span></label>
+              <div class="input-prefix-wrap"><span class="input-prefix">$</span>
+              <input type="number" id="q-health-member-post65" placeholder="0" oninput="calcHealthTotal()"></div>
+            </div>
+            <div class="q-item" id="health-spouse-post65-field">
+              <label>Spouse premium <span class="hint">(while spouse is still pre-65 or on Medicare)</span></label>
+              <div class="input-prefix-wrap"><span class="input-prefix">$</span>
+              <input type="number" id="q-health-spouse-post65" placeholder="0" oninput="calcHealthTotal()"></div>
+            </div>
+            <div class="q-item" style="display:flex;align-items:flex-end;padding-bottom:2px">
+              <div style="background:rgba(42,157,143,0.07);border-radius:10px;padding:10px 14px;width:100%">
+                <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:4px;font-family:var(--font-mono)">TOTAL POST-65 / MO</div>
+                <div style="font-size:1.2rem;font-weight:700;color:var(--teal);font-family:var(--font-mono)" id="health-total-post65">$0</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:11px 14px;font-size:0.8rem;color:var(--slate);line-height:1.65;margin-top:4px">
+            💡 <strong style="color:var(--gold)">Don't know your exact rates yet?</strong> STRS Ohio members can find current retiree health premium tables at <a href="https://www.strsoh.org" target="_blank" style="color:var(--teal)">strsoh.org</a> under the Health Care section. Other state systems publish similar rate sheets — check your pension system's retiree benefits guide. Your HR department may also have this info.
+          </div>
+        </div>
+
+        <div id="health-self-insure-fields" style="display:none">
+          <div style="margin:16px 0 10px;font-size:0.78rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);padding-bottom:6px">
+            🛡️ Self-Insured Bridge to Medicare
+          </div>
+          <div style="font-size:0.8rem;color:var(--slate);margin-bottom:12px;line-height:1.6">
+            Without pension system coverage, you'll need to bridge healthcare costs until Medicare at age 65 — typically through COBRA, the ACA Marketplace, or a spouse's employer plan.
+          </div>
+          <div class="q-row">
+            <div class="q-item">
+              <label>Estimated monthly premium <span class="hint">(self / ACA / COBRA)</span></label>
+              <div class="input-prefix-wrap"><span class="input-prefix">$</span>
+              <input type="number" id="q-health-self" placeholder="0" oninput="calcHealthTotal()"></div>
+            </div>
+            <div class="q-item">
+              <label>Years until Medicare <span class="hint">(65 minus your retirement age)</span></label>
+              <div class="input-suffix-wrap">
+              <input type="number" id="q-health-bridge-yrs" placeholder="0">
+              <span class="input-suffix">yrs</span></div>
+            </div>
+            <div class="q-item" style="display:flex;align-items:flex-end;padding-bottom:2px">
+              <div style="background:rgba(230,57,70,0.07);border-radius:10px;padding:10px 14px;width:100%">
+                <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:4px;font-family:var(--font-mono)">BRIDGE TOTAL COST</div>
+                <div style="font-size:1.2rem;font-weight:700;color:var(--red);font-family:var(--font-mono)" id="health-bridge-total">$0</div>
+              </div>
             </div>
           </div>
         </div>
+
+        <div style="margin-top:14px;background:rgba(42,157,143,0.06);border-radius:10px;padding:11px 14px;font-size:0.8rem;color:var(--slate);line-height:1.5">
+          💼 Your <strong>HSA balance &amp; contributions</strong> were entered in Step 4 and will be projected forward to help offset these retirement healthcare costs — especially effective post-65 when HSA funds can pay Medicare premiums tax-free.
+        </div>
+
       </div>
 
       <div class="nav-row">
@@ -2210,13 +2298,11 @@ function buildProgress() {
 
 function goTo(step) {
   if (step === 8) generateResults();
-  // Remove active from all cards first, ensuring they fully collapse
   document.querySelectorAll('.section-card').forEach(c => {
     c.classList.remove('active');
     c.style.display = 'none';
     c.style.visibility = 'hidden';
   });
-  // Activate the target card
   const target = document.getElementById('step-' + step);
   if (target) {
     target.style.display = 'block';
@@ -2408,6 +2494,39 @@ function setSpousePensionMode(mode) {
   calcSpousePension();
 }
 
+// ============================
+// HEALTHCARE BRIDGE
+// ============================
+function showHealthFields(hasPensionCoverage) {
+  const pensionFields    = document.getElementById('health-pension-fields');
+  const selfInsureFields = document.getElementById('health-self-insure-fields');
+  if (hasPensionCoverage) {
+    if (pensionFields)    pensionFields.style.display    = '';
+    if (selfInsureFields) selfInsureFields.style.display = 'none';
+  } else {
+    if (pensionFields)    pensionFields.style.display    = 'none';
+    if (selfInsureFields) selfInsureFields.style.display = '';
+  }
+  calcHealthTotal();
+}
+
+function calcHealthTotal() {
+  const memberPre65  = v('q-health-member-pre65');
+  const spousePre65  = v('q-health-spouse-pre65');
+  const memberPost65 = v('q-health-member-post65');
+  const spousePost65 = v('q-health-spouse-post65');
+  const selfMonthly  = v('q-health-self');
+  const bridgeYrs    = v('q-health-bridge-yrs');
+
+  const pre65El  = document.getElementById('health-total-pre65');
+  const post65El = document.getElementById('health-total-post65');
+  const bridgeEl = document.getElementById('health-bridge-total');
+
+  if (pre65El)  pre65El.innerText  = '$' + Math.round(memberPre65  + spousePre65).toLocaleString();
+  if (post65El) post65El.innerText = '$' + Math.round(memberPost65 + spousePost65).toLocaleString();
+  if (bridgeEl) bridgeEl.innerText = '$' + Math.round(selfMonthly  * 12 * bridgeYrs).toLocaleString();
+}
+
 function calcSpousePension() {
   if (spousePensionMode === 'own') {
     const known = v('q-spouse-pension-known');
@@ -2556,22 +2675,62 @@ function toggleAlreadyRetired() {
   const retireField = document.getElementById('retireage-field');
   const retireInput = document.getElementById('q-retireage');
 
+  // Career section — SS exempt question
+  const labelSSExempt      = document.getElementById('label-ssexempt');
+  const btnSSExemptYes     = document.getElementById('ssexempt-yes');
+  const btnSSExemptNo      = document.getElementById('ssexempt-no');
+  const btnSSExemptUnsure  = document.getElementById('ssexempt-notsure');
+  const ssExemptCallout    = document.getElementById('ssexempt-callout');
+
+  // SS Strategy section labels
+  const labelSSCredits    = document.getElementById('label-ss-credits');
+  const btnSSYes          = document.getElementById('rg-ss-prior-yes');
+  const labelSpouseClaim  = document.getElementById('label-spouse-claim');
+  const labelTeacherClaim = document.getElementById('label-teacher-claim');
+
   if (alreadyRetired) {
     check.style.background  = 'var(--gold)';
     check.style.borderColor = 'var(--gold)';
     check.innerHTML         = '✓';
-    if (serviceEl)   serviceEl.style.display   = 'none';
-    if (retireField) retireField.style.display  = 'none';
+    if (serviceEl)   serviceEl.style.display  = 'none';
+    if (retireField) retireField.style.display = 'none';
     if (retireInput && v('q-age')) retireInput.value = v('q-age');
     setPensionMode('retired');
+
+    // Past tense — career section SS exempt question
+    if (labelSSExempt)     labelSSExempt.innerHTML     = 'Did you pay into Social Security while working as a teacher? <span class="hint">(some states exempt teachers from SS — others don\'t)</span>';
+    if (btnSSExemptYes)    btnSSExemptYes.innerText    = 'No — I did NOT pay into SS';
+    if (btnSSExemptNo)     btnSSExemptNo.innerText     = 'Yes — I DID pay into SS';
+    if (btnSSExemptUnsure) btnSSExemptUnsure.innerText = 'Not sure — I need to check';
+    if (ssExemptCallout)   ssExemptCallout.innerHTML   = '🏛️ <strong style="color:var(--green)">Social Security Fairness Act (Jan 2025):</strong> WEP and GPO have been <strong>repealed</strong>. If your benefits were previously reduced or denied, you may now be eligible for full or restored benefits — including retroactive back-pay. We\'ll walk you through this in Step 5.';
+
+    // Past tense — SS Strategy section
+    if (labelSSCredits)    labelSSCredits.innerHTML    = 'Did you ever work a job that paid into Social Security? <span class="hint">(outside of teaching, or in a state that does participate in SS)</span>';
+    if (btnSSYes)          btnSSYes.innerText          = 'Yes — I earned SS credits from other employment';
+    if (labelSpouseClaim)  labelSpouseClaim.innerText  = 'When did your spouse claim (or plan to claim) Social Security?';
+    if (labelTeacherClaim) labelTeacherClaim.innerText = 'When did you claim (or plan to claim) Social Security?';
+
   } else {
     check.style.background  = 'white';
     check.style.borderColor = 'var(--border)';
     check.innerHTML         = '';
-    if (serviceEl)   serviceEl.style.display   = '';
-    if (retireField) retireField.style.display  = '';
+    if (serviceEl)   serviceEl.style.display  = '';
+    if (retireField) retireField.style.display = '';
     if (retireInput) retireInput.value = '';
     setPensionMode('own');
+
+    // Future tense — career section SS exempt question
+    if (labelSSExempt)     labelSSExempt.innerHTML     = 'Does your state teacher pension exempt you from Social Security? <span class="hint">(historically)</span>';
+    if (btnSSExemptYes)    btnSSExemptYes.innerText    = 'Yes — I do NOT pay into SS';
+    if (btnSSExemptNo)     btnSSExemptNo.innerText     = 'No — I DO pay into SS';
+    if (btnSSExemptUnsure) btnSSExemptUnsure.innerText = 'Not Sure';
+    if (ssExemptCallout)   ssExemptCallout.innerHTML   = '🏛️ <strong style="color:var(--green)">Social Security Fairness Act (Jan 2025):</strong> WEP and GPO have been <strong>repealed</strong>. Teachers who were previously denied or reduced SS benefits may now be eligible for full or restored benefits — including spousal benefits. We\'ll walk you through this in Step 5.';
+
+    // Future tense — SS Strategy section
+    if (labelSSCredits)    labelSSCredits.innerHTML    = 'Have you ever worked a job that paid into Social Security? <span class="hint">(outside of teaching, or in a state that does participate in SS)</span>';
+    if (btnSSYes)          btnSSYes.innerText          = 'Yes — I have SS credits from other employment';
+    if (labelSpouseClaim)  labelSpouseClaim.innerText  = 'When do you plan to have your spouse claim Social Security?';
+    if (labelTeacherClaim) labelTeacherClaim.innerText = 'Your teacher claiming strategy (if eligible for SS)';
   }
   updateSidebar();
 }
